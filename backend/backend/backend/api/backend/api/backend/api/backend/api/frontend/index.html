@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📊 Samuel's Stock Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <h1>📊 나의 주식 포트폴리오</h1>
+                <p class="subtitle">매일 아침 08:00 자동 업데이트</p>
+            </div>
+            <div class="header-info">
+                <span id="last-update" class="update-time">마지막 업데이트: --</span>
+                <button onclick="refreshDashboard()" class="btn-refresh" title="지금 새로고침">🔄</button>
+            </div>
+        </header>
+
+        <div class="summary-section">
+            <div class="summary-card">
+                <div class="summary-label">보유 종목</div>
+                <div class="summary-value" id="stock-count">0</div>
+            </div>
+            <div class="summary-card">
+                <div class="summary-label">총 평가액</div>
+                <div class="summary-value" id="total-value">0 VND</div>
+            </div>
+            <div class="summary-card">
+                <div class="summary-label">평가 손익</div>
+                <div class="summary-value" id="total-profit">0 VND</div>
+            </div>
+        </div>
+
+        <div class="add-stock-section">
+            <h3>🆕 새 종목 추가</h3>
+            <div class="add-stock-form">
+                <input type="text" id="ticker-input" placeholder="종목 코드 (예: VIC)" maxlength="5">
+                <input type="number" id="quantity-input" placeholder="수량" min="0">
+                <input type="number" id="buy-price-input" placeholder="매수가" min="0">
+                <button onclick="addStock()" class="btn-add">추가</button>
+            </div>
+        </div>
+
+        <h2 class="section-title">📈 포트폴리오</h2>
+        <div id="dashboard" class="dashboard-grid"></div>
+
+        <div id="detail-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <button class="modal-close" onclick="closeModal()">✕</button>
+                <h2 id="modal-ticker"></h2>
+                
+                <div class="chart-container">
+                    <canvas id="detail-chart"></canvas>
+                </div>
+                
+                <div class="news-container">
+                    <h3>📰 최근 뉴스 (1주일)</h3>
+                    <div id="news-list" class="news-list"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
